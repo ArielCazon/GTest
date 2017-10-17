@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GlobonsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="idDireccion" />
+          </Key>
+          <Property Name="idDireccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="calle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="numero" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="idPersona" />
+          </Key>
+          <Property Name="idPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="numeroDocumento" Type="int" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="direccion" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Persona_Direccion">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="idDireccion" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GlobonsModelStoreContainer">
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Persona_Direccion" Association="Self.FK_Persona_Direccion">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GlobonsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="idDireccion" />
+          </Key>
+          <Property Name="idDireccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="calle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numero" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_Direccion" FromRole="Direccion" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="idPersona" />
+          </Key>
+          <Property Name="idPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numeroDocumento" Type="Int32" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="direccion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK_Persona_Direccion" FromRole="Persona" ToRole="Direccion" />
+        </EntityType>
+        <Association Name="FK_Persona_Direccion">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="idDireccion" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GlobonsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <AssociationSet Name="FK_Persona_Direccion" Association="Self.FK_Persona_Direccion">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GlobonsModelStoreContainer" CdmEntityContainer="GlobonsEntities">
+          <EntitySetMapping Name="Direccion">
+            <EntityTypeMapping TypeName="GlobonsModel.Direccion">
+              <MappingFragment StoreEntitySet="Direccion">
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="GlobonsModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="numeroDocumento" ColumnName="numeroDocumento" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

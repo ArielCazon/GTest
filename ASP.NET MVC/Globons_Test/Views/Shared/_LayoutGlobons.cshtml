@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication1</title>
+    <script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="~/Scripts/Globons.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"  type="text/javascript"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="~/Home/Index">Globons Test</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="~/Direccion/Index">Direccion</a></li>
+                    <li><a href="~/Persona/Index">Persona</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>Ariel Cazón</p>
+        </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

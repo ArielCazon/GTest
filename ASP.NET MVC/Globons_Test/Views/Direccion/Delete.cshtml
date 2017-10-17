@@ -1,0 +1,61 @@
+﻿@model Globons_Test.Models.DireccionViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutGlobons.cshtml";
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.Mensaje))
+{ 
+    <h2>Eliminar</h2>               
+    <div>
+        <h3>
+            @ViewBag.Mensaje
+        </h3>
+    </div>
+
+    <div>
+        @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+}
+else
+{
+    <fieldset>
+        <legend>Esta accion eliminara la siguiente Direccion</legend>
+        <div class="form-group">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.IdDireccion)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.IdDireccion)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Calle)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Calle)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Numero)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Numero)
+            </div>
+        </div>
+    </fieldset>
+    using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+    <p>
+        @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-primary" })
+        <input type="submit" class="btn btn-danger" value="Eliminar" />
+    </p>
+    }
+}

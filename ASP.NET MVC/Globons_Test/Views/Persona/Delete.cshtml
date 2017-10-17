@@ -1,0 +1,63 @@
+﻿@model Globons_Test.Models.PersonaViewModel
+
+@{
+    ViewBag.Title = "Eliminar Persona";
+    Layout = "~/Views/Shared/_LayoutGlobons.cshtml";
+}
+
+<fieldset>
+    <legend>Esta accion eliminara esta Persona</legend>
+
+    <div class="form-group">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Nombre)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Apellido)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Apellido)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.NumeroDocumento)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.NumeroDocumento)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.FechaNacimientoFormateada)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.DireccionCompleta)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.DireccionCompleta)
+        </div>
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-primary" })
+        <input type="submit" class="btn btn-danger" value="Eliminar" />
+    </p>
+}

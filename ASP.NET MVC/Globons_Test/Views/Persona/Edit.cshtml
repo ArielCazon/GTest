@@ -1,0 +1,77 @@
+﻿@model Globons_Test.Models.PersonaViewModel
+
+@{
+    ViewBag.Title = "Editar Persona";
+    Layout = "~/Views/Shared/_LayoutGlobons.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Editar Persona</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Nombre)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Nombre)
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Apellido)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Apellido)
+                @Html.ValidationMessageFor(model => model.Apellido)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NumeroDocumento)
+            </div>
+            <div class="editor-field">
+            @Html.TextBoxFor(model => model.NumeroDocumento, new { @class = "numericOnly" })
+                @Html.ValidationMessageFor(model => model.NumeroDocumento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FechaNacimiento)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.FechaNacimiento ,  new { @class = "calendarCustom dateBox" })
+                @Html.ValidationMessageFor(model => model.FechaNacimiento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.idDireccion)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.idDireccion, (IEnumerable<SelectListItem>)ViewBag.Direcciones, "Seleccione una Direccion", new {@style ="color : black;" })
+                @Html.ValidationMessageFor(model => model.idDireccion)
+            </div>
+        </div>
+        <p>
+            @Html.ActionLink("Volver al listado", "Index", null, new { @class="btn btn-primary" })
+            <input type="submit" value="Guardar"  class="btn btn-success"/>
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
