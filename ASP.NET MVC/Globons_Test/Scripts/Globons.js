@@ -55,6 +55,8 @@
     });
 
     $(".calendarCustom").removeAttr("data-val-date");
+    $(".calendarCustom").attr('readOnly', 'true');
+
     var fecha = $(".calendarCustom").val();
     if (fecha != undefined && fecha.length > 10)
     {

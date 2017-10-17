@@ -67,6 +67,10 @@
             @Html.ActionLink("Volver al listado", "Index", null, new { @class="btn btn-primary" })
             <input type="submit" value="Crear"  class="btn btn-success"/>
         </p>
+        @if (ViewBag.DocumentoDuplicado != null)
+        { 
+            <p class="text-danger">El numero de documento ingresado ya existe.</p>
+        }
     </fieldset>
 }
 

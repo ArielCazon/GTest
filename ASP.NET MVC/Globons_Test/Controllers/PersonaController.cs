@@ -34,10 +34,15 @@ namespace Globons_Test.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var personaDb = Map(model);
-                    db.Persona.Add(personaDb);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");                
+                    if (!DocumentExists(model.NumeroDocumento))
+                    {
+                        var personaDb = Map(model);
+                        db.Persona.Add(personaDb);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                    ViewBag.DocumentoDuplicado = true;
                 }
 
                 ViewBag.Direcciones = GetDirecciones();
@@ -71,12 +76,16 @@ namespace Globons_Test.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var persona = Map(model);
-                    db.Entry(persona).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");               
-                }
+                    if (!DocumentExists(model.NumeroDocumento))
+                    {
+                        var persona = Map(model);
+                        db.Entry(persona).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    ViewBag.DocumentoDuplicado = true;
 
+                }
                 ViewBag.Direcciones = GetDirecciones();
                 return View(model);
             }
@@ -191,6 +200,16 @@ namespace Globons_Test.Controllers
             };
 
             return personaVm;
+        }
+
+        private bool DocumentExists(int numeroDocumento)
+        {
+            var documento = db.Persona.Where(x => x.numeroDocumento == numeroDocumento);
+            if (documento.Count() > 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

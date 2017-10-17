@@ -40,7 +40,7 @@
                 @Html.LabelFor(model => model.NumeroDocumento)
             </div>
             <div class="editor-field">
-            @Html.TextBoxFor(model => model.NumeroDocumento, new { @class = "numericOnly" })
+                @Html.TextBoxFor(model => model.NumeroDocumento, new { @class = "numericOnly" })
                 @Html.ValidationMessageFor(model => model.NumeroDocumento)
             </div>
         </div>
@@ -50,7 +50,7 @@
                 @Html.LabelFor(model => model.FechaNacimiento)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(model => model.FechaNacimiento ,  new { @class = "calendarCustom dateBox" })
+                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "calendarCustom dateBox" })
                 @Html.ValidationMessageFor(model => model.FechaNacimiento)
             </div>
         </div>
@@ -60,14 +60,18 @@
                 @Html.LabelFor(model => model.idDireccion)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.idDireccion, (IEnumerable<SelectListItem>)ViewBag.Direcciones, "Seleccione una Direccion", new {@style ="color : black;" })
+                @Html.DropDownListFor(model => model.idDireccion, (IEnumerable<SelectListItem>)ViewBag.Direcciones, "Seleccione una Direccion", new { @style = "color : black;" })
                 @Html.ValidationMessageFor(model => model.idDireccion)
             </div>
         </div>
         <p>
-            @Html.ActionLink("Volver al listado", "Index", null, new { @class="btn btn-primary" })
-            <input type="submit" value="Guardar"  class="btn btn-success"/>
+            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-primary" })
+            <input type="submit" value="Guardar" class="btn btn-success" />
         </p>
+        @if (ViewBag.DocumentoDuplicado != null)
+        { 
+            <p class="text-danger">El numero de documento ingresado ya existe.</p>
+        }
     </fieldset>
 }
 
